@@ -93,14 +93,9 @@ export default function Twin() {
         }
     };
 
-    // Check if avatar exists
-    const [hasAvatar, setHasAvatar] = useState(false);
-    useEffect(() => {
-        // Check if avatar.png exists
-        fetch('/avatar.png', { method: 'HEAD' })
-            .then(res => setHasAvatar(res.ok))
-            .catch(() => setHasAvatar(false));
-    }, []);
+    // Prefer avatar.png; fall back to Bot icon if it fails to load
+    // (HEAD checks often fail on CloudFront/S3 even when GET works)
+    const [hasAvatar, setHasAvatar] = useState(true);
 
     return (
         <div className="flex flex-col h-full bg-gray-50 rounded-lg shadow-lg">
@@ -121,7 +116,8 @@ export default function Twin() {
                             <img 
                                 src="/avatar.png" 
                                 alt="Digital Twin Avatar" 
-                                className="w-20 h-20 rounded-full mx-auto mb-3 border-2 border-gray-300"
+                                className="w-20 h-20 rounded-full mx-auto mb-3 border-2 border-gray-300 object-cover"
+                                onError={() => setHasAvatar(false)}
                             />
                         ) : (
                             <Bot className="w-12 h-12 mx-auto mb-3 text-gray-400" />
@@ -144,7 +140,8 @@ export default function Twin() {
                                     <img 
                                         src="/avatar.png" 
                                         alt="Digital Twin Avatar" 
-                                        className="w-8 h-8 rounded-full border border-slate-300"
+                                        className="w-8 h-8 rounded-full border border-slate-300 object-cover"
+                                        onError={() => setHasAvatar(false)}
                                     />
                                 ) : (
                                     <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
@@ -188,7 +185,8 @@ export default function Twin() {
                                 <img 
                                     src="/avatar.png" 
                                     alt="Digital Twin Avatar" 
-                                    className="w-8 h-8 rounded-full border border-slate-300"
+                                    className="w-8 h-8 rounded-full border border-slate-300 object-cover"
+                                    onError={() => setHasAvatar(false)}
                                 />
                             ) : (
                                 <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
