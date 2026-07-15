@@ -1,0 +1,21 @@
+{
+    "full_name": "Marcel Steffen",
+    "name": "Marci",
+    "current_role": "Product Owner",
+    "location": "Donaueschingen, Germany",
+    "email": "marcel.steffen@hotmail.de",
+    "linkedin": "linkedin.com/in/marcel-steffen",
+    "specialties": [
+      "Product & Agile Delivery: SAFe PO/PM, Roadmap, User Stories & Backlog, Sprint Planning & Reviews, JIRA",
+      "AI & Platforms: AI-Services, API-Platforms, Multi-Agent-Workflows, AI Coding Tools (e.g. Cursor, Claude Code, Codex)",
+      "Tech Understanding: AWS, Python, NEXTJS, Angular, TypeScript, JavaScript, GitHub, Firebase"
+    ],
+    "years_experience": 7,
+    "education": [
+      {
+        "degree": "Bachelor of Arts - International Business",
+        "institution": "Cooperative State University Baden-Wuerttemberg",
+        "year": "2018"
+      }
+    ]
+  }
