@@ -29,6 +29,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Temporary: prove whether secrets.AWS_ROLE_ARN is empty/wrong
+      - name: Debug OIDC inputs
+        run: |
+          echo "github.repository=${{ github.repository }}"
+          echo "job.environment=${{ github.event.inputs.environment || 'dev' }}"
+          if [ -z "$AWS_ROLE_ARN" ]; then
+            echo "::error::AWS_ROLE_ARN secret is EMPTY — check Repository/Environment secrets"
+            exit 1
+          fi
+          echo "AWS_ROLE_ARN is set (length ${#AWS_ROLE_ARN})"
+          echo "DEFAULT_AWS_REGION=${DEFAULT_AWS_REGION:-EMPTY}"
+        env:
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+          DEFAULT_AWS_REGION: ${{ secrets.DEFAULT_AWS_REGION }}
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
